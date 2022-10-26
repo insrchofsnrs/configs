@@ -9,7 +9,7 @@ sudo apt update
 sudo apt install -y mc screenfetch net-tools ncdu samba docker.io docker-compose
 echo "chto to ne to"
 # sudo groupadd docker
-sudo usermod -aG docker pi
+usermod -aG docker pi
 echo 'posle sudo usermod -aG docker $USER'
 newgrp docker
 echo "do nordvpn"
