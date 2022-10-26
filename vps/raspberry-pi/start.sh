@@ -11,7 +11,7 @@ echo "chto to ne to"
 # sudo groupadd docker
 sudo usermod -aG docker $USER
 newgrp docker
-sh <(wget -qO - https://downloads.nordcdn.com/apps/linux/install.sh)
+sudo sh <(wget -qO - https://downloads.nordcdn.com/apps/linux/install.sh)
 sudo nordvpn login --legacy
 sudo nordvpn whitelist add subnet 192.168.0.0/16
 sudo nordvpn whitelist add port 22
