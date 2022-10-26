@@ -13,11 +13,11 @@ fi
 
 echo "let's setup this damn server"
 sudo apt update
-sudo apt -yq --allow upgrade
-sudo apt -yq --allow autoclean
-sudo apt -yq --allow autoremove
+sudo apt -yq upgrade
+sudo apt -yq autoclean
+sudo apt -yq autoremove
 
-sudo apt install -yq --allow mc screenfetch net-tools ncdu samba
+sudo apt install -yq mc screenfetch net-tools ncdu samba
 
 sudo snap install docker
 sudo groupadd docker
