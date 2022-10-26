@@ -6,7 +6,7 @@ sudo apt -yq --allow upgrade
 sudo apt -yq --allow autoclean
 sudo apt -yq --allow autoremove
 
-sudo apt install -yq --allow mc screenfetch net-tools ncdu
+sudo apt install -yq --allow mc screenfetch net-tools ncdu samba
 
 sudo snap install docker
 sudo groupadd docker
@@ -21,8 +21,11 @@ nordvpn set technology NordLynx
 nordvpn set autoconnect on spain
 nordvpn c
 
-mkdir bit-torrent && cd bit-torrent
-mkdir config torrents downloads
+mkdir bit-torrent
+mkdir share
+sudo chown 520 share
+cd bit-torrent
+mkdir config torrents
 sudo chown 520 config torrents downloads
 cat > docker-compose.yaml <<EOF
 version: "3.9"
@@ -34,7 +37,7 @@ services:
     volumes:
        - $PWD/config:/config
        - $PWD/torrents:/torrents
-       - $PWD/downloads:/downloads
+       - /home/pi/share:/downloads
        - /etc/timezone:/etc/timezone:ro
        - /etc/localtime:/etc/localtime:ro
     ports:
@@ -44,3 +47,15 @@ services:
     restart: always
 EOF
 docker compose up -d
+
+cd ~
+sudo systemctl enable smbd
+sudo tee -a /etc/samba/smb.conf <<EOF
+[share]
+    comment = Samba on Ubuntu
+    path = /home/pi/share
+    read only = no
+    browsable = yes
+EOF
+sudo service smbd restart
+sudo smbpasswd -a pi

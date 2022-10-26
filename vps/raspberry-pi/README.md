@@ -1,0 +1,1 @@
+sudo sh <(wget -qO - https://github.com/insrchofsnrs/configs/blob/master/vps/raspberry-pi/start.sh)
