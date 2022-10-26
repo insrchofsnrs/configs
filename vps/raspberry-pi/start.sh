@@ -60,7 +60,7 @@ EOF
 docker compose up -d
 
 cd /home/pi
-sudo systemctl enable smbd
+sudo systemctl start smbd
 sudo tee -a /etc/samba/smb.conf <<EOF
 [share]
     comment = Samba on Ubuntu
