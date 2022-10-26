@@ -1,5 +1,16 @@
 #!/bin/bash
 
+# check for root access
+SUDO=
+if [ "$(id -u)" -ne 0 ]; then
+    SUDO=$(command -v sudo 2> /dev/null)
+
+    if [ ! -x "$SUDO" ]; then
+        echo "Error: Run this script as root"
+        exit 1
+    fi
+fi
+
 echo "let's setup this damn server"
 sudo apt update
 sudo apt -yq --allow upgrade
@@ -48,7 +59,7 @@ services:
 EOF
 docker compose up -d
 
-cd ~
+cd /home/pi
 sudo systemctl enable smbd
 sudo tee -a /etc/samba/smb.conf <<EOF
 [share]
