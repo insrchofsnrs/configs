@@ -6,14 +6,11 @@ sudo apt update
 sudo apt -yq upgrade
 sudo apt -yq autoclean
 sudo apt -yq autoremove
-
 sudo apt install -yq mc screenfetch net-tools ncdu samba
-
 sudo snap install docker
 sudo groupadd docker
 sudo usermod -aG docker $USER
 newgrp docker
-
 # bash < <(wget -qO - https://downloads.nordcdn.com/apps/linux/install.sh)
 nordvpn login --legacy
 nordvpn whitelist add subnet 192.168.0.0/16
@@ -21,7 +18,6 @@ nordvpn whitelist add port 22
 nordvpn set technology NordLynx
 nordvpn set autoconnect on spain
 nordvpn c
-
 mkdir bit-torrent
 mkdir share
 sudo chown 520 share
@@ -48,7 +44,6 @@ services:
     restart: always
 EOF
 docker compose up -d
-
 cd /home/pi
 sudo systemctl start smbd
 sudo tee -a /etc/samba/smb.conf <<EOF
