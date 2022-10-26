@@ -14,7 +14,7 @@ sudo groupadd docker
 sudo usermod -aG docker $USER
 newgrp docker
 
-bash < <(wget -qO - https://downloads.nordcdn.com/apps/linux/install.sh)
+# bash < <(wget -qO - https://downloads.nordcdn.com/apps/linux/install.sh)
 nordvpn login --legacy
 nordvpn whitelist add subnet 192.168.0.0/16
 nordvpn whitelist add port 22
