@@ -1,13 +1,12 @@
 #!/bin/bash
-# sudo sh <(wget -qO - https://github.com/insrchofsnrs/configs/blob/master/vps/raspberry-pi/start.sh)
+# sh <(wget -qO - https://raw.githubusercontent.com/insrchofsnrs/configs/master/vps/raspberry-pi/start.sh)
 # check for root access
 echo "let's setup this damn server"
 sudo apt update
 sudo apt -yq upgrade
 sudo apt -yq autoclean
 sudo apt -yq autoremove
-sudo apt install -yq mc screenfetch net-tools ncdu samba
-sudo snap install docker
+sudo apt install -yq mc screenfetch net-tools ncdu samba docker.io
 sudo groupadd docker
 sudo usermod -aG docker $USER
 newgrp docker
