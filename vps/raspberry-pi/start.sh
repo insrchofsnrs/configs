@@ -1,5 +1,5 @@
 #!/bin/bash
-
+# sudo sh <(wget -qO - https://github.com/insrchofsnrs/configs/blob/master/vps/raspberry-pi/start.sh)
 # check for root access
 echo "let's setup this damn server"
 sudo apt update
@@ -11,7 +11,7 @@ sudo snap install docker
 sudo groupadd docker
 sudo usermod -aG docker $USER
 newgrp docker
-# bash < <(wget -qO - https://downloads.nordcdn.com/apps/linux/install.sh)
+sudo sh <(wget -qO - https://downloads.nordcdn.com/apps/linux/install.sh)
 nordvpn login --legacy
 nordvpn whitelist add subnet 192.168.0.0/16
 nordvpn whitelist add port 22
