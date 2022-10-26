@@ -10,6 +10,7 @@ sudo apt install -y mc screenfetch net-tools ncdu samba docker.io docker-compose
 echo "chto to ne to"
 # sudo groupadd docker
 sudo usermod -aG docker $USER
+echo 'posle sudo usermod -aG docker $USER'
 newgrp docker
 echo "do nordvpn"
 sudo sh <(wget -qO - https://downloads.nordcdn.com/apps/linux/install.sh)
