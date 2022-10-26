@@ -6,7 +6,7 @@ sudo apt update
 # sudo apt -yq upgrade
 # sudo apt -yq autoclean
 # sudo apt -yq autoremove
-sudo apt install -yq mc screenfetch net-tools ncdu samba docker.io docker-compose
+sudo apt install -y mc screenfetch net-tools ncdu samba docker.io docker-compose
 # sudo groupadd docker
 sudo usermod -aG docker $USER
 newgrp docker
