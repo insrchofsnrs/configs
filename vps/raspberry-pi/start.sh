@@ -3,26 +3,26 @@
 # check for root access
 echo "let's setup this damn server"
 sudo apt update
-sudo apt -yq upgrade
-sudo apt -yq autoclean
-sudo apt -yq autoremove
-sudo apt install -yq mc screenfetch net-tools ncdu samba docker.io
-sudo groupadd docker
+# sudo apt -yq upgrade
+# sudo apt -yq autoclean
+# sudo apt -yq autoremove
+sudo apt install -yq mc screenfetch net-tools ncdu samba docker.io docker-compose
+# sudo groupadd docker
 sudo usermod -aG docker $USER
 newgrp docker
-sudo sh <(wget -qO - https://downloads.nordcdn.com/apps/linux/install.sh)
-nordvpn login --legacy
-nordvpn whitelist add subnet 192.168.0.0/16
-nordvpn whitelist add port 22
-nordvpn set technology NordLynx
-nordvpn set autoconnect on spain
-nordvpn c
+sh <(wget -qO - https://downloads.nordcdn.com/apps/linux/install.sh)
+sudo nordvpn login --legacy
+sudo nordvpn whitelist add subnet 192.168.0.0/16
+sudo nordvpn whitelist add port 22
+sudo nordvpn set technology NordLynx
+sudo nordvpn set autoconnect on spain
+sudo nordvpn c spain
 mkdir bit-torrent
 mkdir share
 sudo chown 520 share
 cd bit-torrent
 mkdir config torrents
-sudo chown 520 config torrents downloads
+sudo chown 520 config torrents
 cat > docker-compose.yaml <<EOF
 version: "3.9"
 
@@ -42,9 +42,10 @@ services:
       - "6881:6881/udp"
     restart: always
 EOF
-docker compose up -d
+docker-compose up -d
 cd /home/pi
 sudo systemctl start smbd
+sudo systemctl enable smbd
 sudo tee -a /etc/samba/smb.conf <<EOF
 [share]
     comment = Samba on Ubuntu
