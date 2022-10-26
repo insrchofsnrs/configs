@@ -11,7 +11,7 @@ echo "chto to ne to"
 # sudo groupadd docker
 sudo usermod -aG docker pi && echo $?
 echo 'posle sudo usermod -aG docker $USER'
-newgrp docker
+sudo newgrp docker
 echo "do nordvpn"
 sudo sh <(wget -qO - https://downloads.nordcdn.com/apps/linux/install.sh)
 echo "posle nordvpn"
