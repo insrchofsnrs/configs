@@ -11,9 +11,9 @@ echo "chto to ne to"
 # sudo groupadd docker
 sudo usermod -aG docker $USER
 echo 'posle sudo usermod -aG docker $USER'
-sudo newgrp docker
+# sudo newgrp docker
 echo "do nordvpn"
-sudo sh <(wget -qO - https://downloads.nordcdn.com/apps/linux/install.sh)
+sh <(wget -qO - https://downloads.nordcdn.com/apps/linux/install.sh)
 echo "posle nordvpn"
 sudo nordvpn login --legacy
 sudo nordvpn whitelist add subnet 192.168.0.0/16
