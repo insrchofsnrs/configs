@@ -13,7 +13,7 @@ sudo usermod -aG docker $USER
 echo 'posle sudo usermod -aG docker $USER'
 # sudo newgrp docker
 echo "do nordvpn"
-sh <(wget -qO - https://downloads.nordcdn.com/apps/linux/install.sh)
+sudo sh <(wget -qO - https://downloads.nordcdn.com/apps/linux/install.sh)
 echo "posle nordvpn"
 sudo nordvpn login --legacy
 sudo nordvpn whitelist add subnet 192.168.0.0/16
