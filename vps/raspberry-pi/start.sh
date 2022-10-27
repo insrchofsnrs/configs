@@ -60,3 +60,5 @@ sudo tee -a /etc/samba/smb.conf <<EOF
 EOF
 sudo service smbd restart
 sudo smbpasswd -a pi
+
+sudo reboot
