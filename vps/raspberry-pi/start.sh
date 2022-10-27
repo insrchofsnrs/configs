@@ -28,7 +28,7 @@ cd bit-torrent
 mkdir config torrents
 sudo chown 520 config torrents
 cat > docker-compose.yaml <<EOF
-version: "3.9"
+version: "3.3"
 
 services:
   torrent:
