@@ -46,7 +46,7 @@ services:
       - "6881:6881/udp"
     restart: always
 EOF
-docker-compose up -d
+sudo docker-compose up -d
 cd /home/pi
 sudo systemctl start smbd
 sudo systemctl enable smbd
