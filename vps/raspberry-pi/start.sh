@@ -3,9 +3,9 @@
 # check for root access
 echo "let's setup this damn server"
 sudo apt update
-sudo apt -y upgrade
-sudo apt -y autoclean
-sudo apt -y autoremove
+sudo apt -yq upgrade
+sudo apt -yq autoclean
+sudo apt -yq autoremove
 sudo apt install -y mc screenfetch net-tools ncdu samba docker.io docker-compose
 echo "chto to ne to"
 # sudo groupadd docker
