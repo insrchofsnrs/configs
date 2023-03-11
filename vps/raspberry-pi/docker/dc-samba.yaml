@@ -1,0 +1,58 @@
+version: '3'
+services:
+  samba:
+    image: dperson/samba
+    restart: always
+    ports:
+      - "139:139"
+      - "445:445"
+    volumes:
+      - /home:/share
+    environment:
+      TZ: "America/New_York"
+      SAMBA_USERNAME: "smile"
+      SAMBA_PASSWORD: "smile"
+      SAMBA_DOMAIN: "MYDOMAIN"
+    command: >
+      -u "${SAMBA_USERNAME};${SAMBA_PASSWORD}"
+      -s "My Share;/share;yes;yes;yes;smile"
+
+
+sudo docker run -it -p 139:139 -p 445:445 dperson/samba -v /home:/share --name samba \
+            -u "smile;smile" \
+            -s "smile slim node;/share;yes;yes;yes;smile" \
+            -p
+
+
+version: '3'
+services:
+  samba:
+    container_name: samba
+    image: dperson/samba
+    restart: always
+    ports:
+      - "139:139"
+      - "445:445"
+    volumes:
+      - /home:/share
+    command: >
+      -u "smile;smile"
+      -s "My Share;/share;yes;yes;yes;smile"
+      -p
+
+
+sudo docker run -it -p 139:139 -p 445:445 --privileged  --name samba \
+    -v /home/ubuntu:/share elswork/samba \
+    -u "1001:1001:ubuntu:ubuntu:pirate123" \
+    -s "smile node:/share:rw:ubuntu" 
+
+
+docker run -it -p 139:139 -p 445:445 --hostname $HOSTNAME --name samba\
+    -v /home/ubuntu:/share elswork/samba \
+    -u "$(id -u):$(id -g):$(id -un):$(id -gn):123" \
+    -s "share:/share:rw:$(id -un)"
+
+sudo docker run -it -p 139:139 -p 445:445 --privileged  --name samba \
+    -v /home/ubuntu:/share elswork/samba \
+     -u "1001:1001:ubuntu:ubuntu:pirate123" \
+     -s "smile node:/share:rw:ubuntu" 

@@ -1,0 +1,71 @@
+version: "3"
+services:
+  proxy:
+    image: traefik:v2.4         # Review traefik documentation https://doc.traefik.io/traefik/ 
+    container_name: traefik
+    command:
+      - --api.insecure=true
+      - --providers.docker=true
+      - --providers.docker.exposedbydefault=false
+      - --entrypoints.web.address=:80
+    ports:
+      - 80:80
+      - 8080:8080
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    restart: unless-stopped
+
+  vpn:
+    image: ghcr.io/bubuntux/nordvpn
+    cap_add:
+      - NET_ADMIN               # Required
+      - NET_RAW                 # Required
+    container_name: vpn             # Required
+    environment:                # Review https://github.com/bubuntux/nordvpn#environment-variables
+      - USER=genyav21@gmail.com     # Required
+      - PASS=WE07fM3KsNO563az         # Required
+      - CONNECT=Spain
+      - TECHNOLOGY=openvpn
+      - PROTOCOL=TCP
+      - NETWORK=192.168.31.0/24  # So it can be accessed within the local network
+      - CHECK_CONNECTION_INTERVAL=120
+      - PRE_CONNECT=nordvpn set meshnet on
+    ports:
+      - 80:8080
+    #   - 6881:6881
+    #   - 6881:6881/udp
+    sysctls:
+      - net.ipv6.conf.all.disable_ipv6=1  # Recomended if using ipv4 only
+    healthcheck:
+      test: ["CMD-SHELL", "nordvpn status | grep -q 'Status: Connected' || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    restart: unless-stopped
+
+  torrent:
+    image: lscr.io/linuxserver/qbittorrent:latest
+    container_name: qbittorrent
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - WEBUI_PORT=8080
+    volumes:
+      - /home/pi/bit-torrent/config:/config
+      - /home/pi/bit-torrent/torrents:/torrents
+      - /home/pi/share:/downloads
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f google.com || exit 1"]
+      interval: 20s
+      timeout: 10s
+      retries: 12
+    network_mode: service:vpn
+    depends_on:
+      - vpn
+    labels:
+      - traefik.enable=true
+      - traefik.http.services.torrent.loadbalancer.server.port=8080
+      - traefik.http.routers.torrent.rule=Host(`192.168.31.144`)
