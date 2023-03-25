@@ -47,8 +47,8 @@ sudo docker run -it -p 139:139 -p 445:445 --privileged  --name samba \
     -s "smile node:/share:rw:ubuntu" 
 
 
-docker run -it -p 139:139 -p 445:445 --hostname $HOSTNAME --name samba\
-    -v /home/ubuntu:/share elswork/samba \
+sudo docker run -it -p 139:139 -p 445:445 --restart always --name samba\
+    -v /home/pi:/share elswork/samba \
     -u "$(id -u):$(id -g):$(id -un):$(id -gn):123" \
     -s "share:/share:rw:$(id -un)"
 
@@ -56,3 +56,17 @@ sudo docker run -it -p 139:139 -p 445:445 --privileged  --name samba \
     -v /home/ubuntu:/share elswork/samba \
      -u "1001:1001:ubuntu:ubuntu:pirate123" \
      -s "smile node:/share:rw:ubuntu" 
+
+version: '3'
+services:
+  samba:
+    image: elswork/samba
+    container_name: samba
+    ports:
+      - "139:139"
+      - "445:445"
+    volumes:
+      - /home/pi:/share
+    commands: >
+      -u "$(id -u):$(id -g):$(id -un):$(id -gn):123"
+      -s "share:/share:rw:$(id -un)"
