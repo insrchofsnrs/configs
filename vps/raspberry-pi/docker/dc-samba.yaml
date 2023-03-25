@@ -70,3 +70,14 @@ services:
     commands: >
       -u "$(id -u):$(id -g):$(id -un):$(id -gn):123"
       -s "share:/share:rw:$(id -un)"
+
+
+sudo docker run -d \
+    -p 139:139 \
+    -p 445:445 \
+    --restart always \
+    --name samba\
+    -v /home/pi/share:/share \
+    elswork/samba \
+    -u "$(id -u):$(id -g):$(id -un):$(id -gn):123" \
+    -s "share:/share:rw:$(id -un)"
