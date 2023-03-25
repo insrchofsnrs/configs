@@ -11,7 +11,7 @@ sudo apt install -yq mc screenfetch net-tools ncdu
 echo "Install docker"
 sudo apt-get remove docker docker-engine docker.io containerd runc
 sudo apt-get update
-sudo apt-get install \
+sudo apt-get install -yq \
     ca-certificates \
     curl \
     gnupg
@@ -53,7 +53,7 @@ sudo chown 520 config torrents
 echo "starting cloning telegram bot for bittorrent"
 git clone https://github.com/insrchofsnrs/qbittorrent-telegram-bot
 cd qbittorrent-telegram-bot
-docker buildx build --platform linux/arm64/v8 -t torrent-bot:latest .
+sudo docker buildx build --platform linux/arm64/v8 -t torrent-bot:latest .
 cd ..
 
 
