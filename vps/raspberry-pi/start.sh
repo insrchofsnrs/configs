@@ -9,7 +9,6 @@ sudo apt update
 sudo apt install -yq mc screenfetch net-tools ncdu
 
 echo "Install docker"
-sudo apt-get remove docker docker-engine docker.io containerd runc
 sudo apt-get update
 sudo apt-get install -yq \
     ca-certificates \
@@ -76,4 +75,9 @@ sudo docker run -d \
     -u "$(id -u):$(id -g):$(id -un):$(id -gn):123" \
     -s "share:/share:rw:$(id -un)"
 
-sudo reboot
+echo "helpful command:"
+echo "blkid - find uuid of ssd"
+echo "sudo nano /etc/fstab"
+echo "UUID=3995d1af-f3aa-4a99-9143-55ad7d356ea9 /home/pi/share ext4 defaults 0 2"
+echo "sudo chown pi:pi share"
+echo "sudo mkfs -t ext4 /dev/sdb"
