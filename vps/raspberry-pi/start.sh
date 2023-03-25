@@ -57,7 +57,13 @@ docker buildx build --platform linux/arm64/v8 -t torrent-bot:latest .
 cd ..
 
 
-echo "Starting samba docker"
+echo "Install autoheal into system"
+sudo docker run -d \
+    --name autoheal \
+    --restart=always \
+    -e AUTOHEAL_CONTAINER_LABEL=all \
+    -v /var/run/docker.sock:/var/run/docker.sock \
+    willfarrell/autoheal
 
 echo "Starting install samba share in docker"
 sudo docker run -d \
