@@ -58,6 +58,7 @@ services:
       - TOKEN=1739327776:AAEzXN_d9ccDAQPl1l5VHVd3wvSQcAIWDCg
       - TELEGRAM_ADMINS=[1739327776]
       - TORRENT_URL=http://192.168.31.194
+    restart: unless-stopped
     depends_on:
       - torrent
 

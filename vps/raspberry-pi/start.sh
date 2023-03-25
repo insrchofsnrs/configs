@@ -3,9 +3,9 @@
 # check for root access
 echo "let's setup this damn server"
 sudo apt update
-sudo apt -yq upgrade
-sudo apt -yq autoclean
-sudo apt -yq autoremove
+# sudo apt -yq upgrade
+# sudo apt -yq autoclean
+# sudo apt -yq autoremove
 sudo apt install -yq mc screenfetch net-tools ncdu
 
 echo "Install docker"
