@@ -7,7 +7,8 @@ services:
       - NET_RAW                 # Required
     container_name: vpn             # Required
     environment:                # Review https://github.com/bubuntux/nordvpn#environment-variables
-
+      - USER=genyav21@gmail.com     # Required
+      - PASS=WE07fM3KsNO563az         # Required
       - CONNECT=Spain
       - TECHNOLOGY=nordlynx
       # - PROTOCOL=TCP

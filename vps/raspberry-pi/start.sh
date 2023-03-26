@@ -55,6 +55,9 @@ cd qbittorrent-telegram-bot
 sudo docker buildx build --platform linux/arm64/v8 -t torrent-bot:latest .
 cd ..
 
+echo "disabling service which uses port 53"
+sudo systemctl stop systemd-resolved
+sudo systemctl disable systemd-resolved
 
 echo "Install autoheal into system"
 sudo docker run -d \
